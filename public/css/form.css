@@ -1,0 +1,85 @@
+.form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    width: 25rem;
+}
+
+.form label {
+    display: block;
+    font-size: 0.9rem;
+    color: grey;
+    padding: .5rem 0;
+}
+
+.form input, .form textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background: #f6f6f6;
+    outline: none;
+    border: 1px solid #d9e4f2e;
+    margin-bottom: 1rem;
+}
+
+.form input:focus , .form textarea:focus{
+    border: 1px solid #5964e0;
+    background: #fff;
+}
+
+.form .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form ul {
+    list-style: none;
+}
+
+.form li {
+    font-size: .8rem;
+    color: crimson;
+}
+
+.form__switch-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid lightgrey;
+}
+
+.form__switch-form a {
+    font-size: 1.1rem;
+    color: grey;
+
+}
+
+.active-form {
+    color: #333 !important;
+    border-bottom: 2px solid #3498db;
+    font-weight: bold;
+}
+
+
+/* Search Form */
+.search-from {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: -1rem;
+    margin-bottom: 3rem;
+}
+.search-from input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background: #f6f6f6;
+    outline: none;
+    border: 1px solid #d9e4f2e;
+}

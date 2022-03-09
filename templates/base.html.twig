@@ -1,0 +1,43 @@
+{% set loggedinUser = app.session.get('loggedinUser') %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        {# {{ encore_entry_link_tags('app') }} #}
+    {% endblock %}
+    <link href={{ asset('css/main.css?') }} rel="stylesheet"/>
+    {% block javascripts %}
+        {# {{ encore_entry_script_tags('app') }} #}
+    {% endblock %}
+</head>
+<body>
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
+<header class="main-header">
+    <div class="container flex">
+        <a class="home-link" href={{ path("jobs") }}>DevJobs</a>
+        {% if(loggedinUser) %}
+            <div class="dropdown">
+                <button class="btn btn--dropbtn center">{{ loggedinUser.getName() }} <img
+                            src={{ asset('assets/expand.svg') }} alt=""></button>
+                <div class="dropdown-content">
+                    <a class="dropdown__link" href={{ path('newJob') }}>Post Job</a>
+                    <a class="dropdown__link" href={{ path('jobsByUser', {id: loggedinUser.getId()}) }}>My Jobs</a>
+                    <a class="dropdown__link" href={{ path('logout') }}>Log out</a>
+                </div>
+            </div>
+        {% else %}
+            <a class="login-link" href={{ "/login" }}>Login</a>
+        {% endif %}
+    </div>
+</header>
+{% block body %}{% endblock %}
+</body>
+</html>

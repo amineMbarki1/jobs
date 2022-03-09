@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset('css/jobs-list.css') }}>
+    <link rel="stylesheet" href={{ asset('css/form.css') }}>
+{% endblock %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ include('_search-form.html.twig') }}
+    </div>
+
+    <main class="container jobs-list">
+        {% for job in jobs %}
+            <a class="card shadow job-card" href={{ "jobs/#{job.getId()}" }}>
+                <div class="job-card__logo">
+                    <img src={{ asset("assets/logos/#{job.getLogo()}") }}>
+                </div>
+                <span>{{ job.getTimeago() }} .</span> <span>{{ job.getContract() }}</span>
+                <h3 class="job-card__title">{{ job.getPosition() }}</h3>
+                <div class="job-card__company">{{ job.getCompany() }}</div>
+                <div class="job-card__location">{{ job.getLocation() }}</div>
+                {#       Delete and update menu         #}
+                {% if loggedinUser %}
+                    {% if job.getUserId()  == loggedinUser.getId() %}
+                        <div style="position:absolute;top: 0; right: 0" class="dropdown">
+                            <div class="btn--dropbtn">
+                                <img src={{ asset('assets/more.svg') }}>
+                            </div>
+                            <div class="dropdown-content">
+                                <div data-jobId={{ job.getId() }} id="editAction">Edit</div>
+                                <div data-jobId={{ job.getId() }}  id="deleteAction">Delete</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </a>
+        {% endfor %}
+
+
+        <a style="visibility: hidden" href="#" class="card job-card">
+            <div class="job-card__logo"></div>
+            <span>5h ago .</span> <span>Full Time</span>
+            <h3 class="job-card__title">Senior Software Engineer</h3>
+            <div class="job-card__company">scoot</div>
+            <div class="job-card__location">United Kingdom</div>
+        </a>
+
+    </main>
+
+    <script>
+        document.querySelectorAll(".job-card").forEach(jobCard => {
+            jobCard.addEventListener('click', function (e) {
+                if (e.target.id === 'editAction') {
+                    e.preventDefault();
+                    const jobid = e.target.dataset.jobid;
+                    const updateUrl = `${window.location.origin}/jobs/update/${jobid}`;
+                    window.location.assign(updateUrl);
+                }
+                if (e.target.id === 'deleteAction') {
+                    e.preventDefault();
+                    const jobid = e.target.dataset.jobid;
+                    const deleteUrl = `${window.location.origin}/jobs/delete/${jobid}`;
+                    window.location.assign(deleteUrl);
+                }
+            })
+        })
+    </script>
+{% endblock %}

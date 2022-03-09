@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ job.getPosition() }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset('css/job-details.css') }}>{% endblock %}
+
+{% block body %}
+
+    {% set requirements = job.getRequirements()|split('-') %}
+    {% set responsibilities = job.getResponsibilities()|split('-') %}
+
+    <main class="job-details container">
+        <section class="job-details__header flex">
+            <div class="left">
+                <img src={{ asset("assets/logos/#{job.getLogo()}")}} alt="">
+            </div>
+            <div class="right">
+                <h1>{{ job.getCompany() }}</h1>
+                <p>{{ job.getWebsite() }}</p>
+                <a target="_blank" class="btn btn-secondary" href={{ job.getWebsite() }}>Company Site</a>
+            </div>
+        </section>
+        <section class="job-details__info">
+            <div class="flex" style="align-items: center; justify-content: space-between">
+                <div class="left">
+                    <span>{{ job.getTimeago() }}</span><span> . {{ job.getContract() }}</span>
+                    <h1>{{ job.getPosition() }}</h1>
+                    <p class="job-details__location">{{ job.getLocation() }}</p>
+                </div>
+                <div class="right">
+                    <a class="btn btn-primary" href={{ job.getApply() }}>Apply</a>
+                </div>
+            </div>
+            <p class="job-details__description"> {{ job.getDescription() }}</p>
+            <h2>Requirements</h2>
+            <p>{{ job.getRequirementsDescription }}</p>
+            <ul class="job-description__requirements">
+                {% for requirement in requirements %}
+                    <li>{{ requirement }}</li>
+                {% endfor %}
+            </ul>
+            <h2>What will you do</h2>
+            <ol>
+                {% for responsibility in responsibilities %}
+                    <li>{{ responsibility }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+    </main>
+    <footer class="container">
+            <h1>{{ job.getPosition() }}</h1>
+            <p>{{ job.getCompany() }}</p>
+            <a target="_blank" class="btn-primary btn" href={{ job.getApply() }}>Apply Now</a>
+    </footer>
+
+{% endblock %}

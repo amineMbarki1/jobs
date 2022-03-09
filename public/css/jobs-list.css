@@ -1,0 +1,42 @@
+.jobs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.job-card {
+    display: block;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    width: 30%;
+    height: 12rem;
+    margin-bottom: 3rem;
+    position: relative;
+
+}
+
+.job-card__logo {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: -2rem;
+    left: -12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.job-card__title {
+
+    padding: .5rem 0;
+}
+
+.job-card__location {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #1976D2;
+}
+
+.job-card span, .job-card__company {
+    color: #757575;
+}

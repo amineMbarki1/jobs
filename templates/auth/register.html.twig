@@ -1,0 +1,20 @@
+{% extends('base.html.twig') %}
+{% block title %}
+    Register New User
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset('css/form.css') }}>
+{% endblock %}
+{% block body %}
+    <main class="center">
+        <div class="form shadow">
+            <div class="form__switch-form">
+                <a class="active-form" href={{ path('register') }}>SIGN UP</a>
+                <a href={{ path('login') }}>LOGIN</a>
+            </div>
+            {{ form(form) }}
+        </div>
+    </main>
+
+
+{% endblock %}
